@@ -7,6 +7,15 @@
     <AssemblyName>Fraxiinus.$(MSBuildProjectName)</AssemblyName>
     <RootNamespace>Fraxiinus.$(MSBuildProjectName.Replace(" ", "_"))</RootNamespace>
 	<ImplicitUsings>disable</ImplicitUsings>
+	<Authors>Etirps </Authors>
+	<Company>$(Authors)</Company>
+	<PackageProjectUrl></PackageProjectUrl>
+	<RepositoryUrl>https://github.com/fraxiinus/roflxd.cs</RepositoryUrl>
+	<PackageTags>rofl;league of legends;replays</PackageTags>
+	<Product>$(AssemblyName)</Product>
+	<Description>Parser for League of Legends replays, part of roflxd</Description>
+	<PackageLicenseExpression>MIT</PackageLicenseExpression>
+	<Version>1.0.1</Version>
   </PropertyGroup>
 
   <ItemGroup>
