@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <AssemblyName>Fraxiinus.$(MSBuildProjectName)</AssemblyName>
+    <RootNamespace>Fraxiinus.$(MSBuildProjectName.Replace(" ", "_"))</RootNamespace>
+	<ImplicitUsings>disable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Definitions\" />
+  </ItemGroup>
+
+</Project>
