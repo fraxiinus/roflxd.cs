@@ -1,12 +1,9 @@
-﻿using Fraxiinus.Rofl.Extract.Data.Models;
-using System;
+﻿using System;
 using System.CommandLine;
 using System.Diagnostics;
 using System.IO;
-using System.Text;
 using System.Text.Encodings.Web;
 using System.Text.Json;
-using System.Text.Unicode;
 using System.Threading.Tasks;
 
 namespace Fraxiinus.Rofl.Extract.Data.SampleApp;
@@ -72,7 +69,6 @@ public class Program
             return;
         }
 
-        var target = new ROFL(file.FullName);
         var loadAll = mode == "full";
         var timer = new Stopwatch();
 
@@ -82,7 +78,7 @@ public class Program
             timer.Start();
         }
 
-        await target.LoadAsync(loadAll);
+        var target = await RoflReader.LoadAsync(file.FullName, loadAll);
 
         if (verbose)
         {
@@ -100,7 +96,10 @@ public class Program
             var outputFile = !string.IsNullOrEmpty(output)
                 ? output
                 : Path.GetFileNameWithoutExtension(file.FullName) + $" - Copy {DateTime.Now:yyyyMMddTHHmmss}.rofl";
-            await target.SaveToFile(outputFile);
+            var bytesToWrite = target.ToBytes();
+
+            using FileStream fileStream = new(outputFile, FileMode.Create);
+            await fileStream.WriteAsync(bytesToWrite);
 
             if (verbose)
             {
