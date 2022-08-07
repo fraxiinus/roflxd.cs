@@ -23,4 +23,4 @@ jobs:
       run: dotnet pack Rofl.Extract.Data/Rofl.Extract.Data.csproj -c Release -o out
 
     - name: Push package to NuGet registry
-      run: dotnet nuget push out\*.nupkg --api-key ${{ secrets.NUGET_KEY }} --skip-duplicate --no-symbols true
+      run: dotnet nuget push out\*.nupkg --api-key ${{ secrets.NUGET_KEY }} --skip-duplicate --no-symbols
