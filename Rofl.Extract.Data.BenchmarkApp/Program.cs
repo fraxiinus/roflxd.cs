@@ -1,5 +1,4 @@
 ﻿using Fraxiinus.ReplayBook.Reader;
-using Fraxiinus.Rofl.Extract.Data.Models;
 using Rofl.Reader;
 using Rofl.Reader.Models;
 using System;
@@ -90,8 +89,7 @@ public class Program
     {
         try
         {
-            var rofl = new ROFL(replayPath);
-            await rofl.LoadAsync(loadAll: false);
+            var rofl = await RoflReader.LoadAsync(replayPath, false);
             return rofl.PayloadHeader!.GameId.ToString();
         }
         catch (Exception)

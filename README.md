@@ -20,21 +20,22 @@ dotnet add package Fraxiinus.Rofl.Extract.Data
 
 ## Usage
 
-Create a `ROFL` object with the desired filepath, then run the `LoadAsync` method.
+Use the `RoflReader` class to read ROFL files by running the `LoadAsync` method with the file path.
 
 ```C#
-var replay = new ROFL("C:\\Documents\\File.rofl");
-await replay.LoadAsync();
+var replay = await RoflReader.LoadAsync("C:\\Documents\\File.rofl");
 ```
 
-If the payload is not required, use the optional parameter to only skip it:
+If the payload is required, use the optional parameter to let the parser know to not skip it:
 
 ```C#
-await replay.LoadAsync(loadAll: false);
+var replay = await RoflReader.LoadAsync("C:\\Documents\\File.rofl", loadAll: true);
 ```
 
 Once the file is loaded, you are free to access the parsed data:
 
 ```C#
-Console.WriteLine(rofl.PayloadHeader!.GameId);
+Console.WriteLine(replay.PayloadHeader!.GameId);
 ```
+
+All the async functions support CancellationTokens.
