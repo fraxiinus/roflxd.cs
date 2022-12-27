@@ -560,6 +560,11 @@ public class PlayerStats
     public string? TurretTakedowns { get; set; }
 
     /// <summary>
+    /// Sorry, this is a field required for ReplayBook to function. Unique ID to match
+    /// </summary>
+    public string? UniqueId { get; set; }
+
+    /// <summary>
     /// "Unreal kills" is a 6 kill killing spree
     /// </summary>
     [JsonPropertyName("UNREAL_KILLS")]
