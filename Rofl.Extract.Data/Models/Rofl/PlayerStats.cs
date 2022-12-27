@@ -587,10 +587,10 @@ public class PlayerStats
     public string? WasAfk { get; set; }
 
     [JsonPropertyName("WAS_AFK_AFTER_FAILED_SURRENDER")]
-    public string? WasAfkAfterFailedSurrended { get; set; }
+    public string? WasAfkAfterFailedSurrender { get; set; }
 
     [JsonPropertyName("WAS_EARLY_SURRENDER_ACCOMPLICE")]
-    public string? WasEarlySurrendedAccomplice { get; set; }
+    public string? WasEarlySurrenderAccomplice { get; set; }
 
     [JsonPropertyName("WAS_LEAVER")]
     public string? WasLeaver { get; set; }
