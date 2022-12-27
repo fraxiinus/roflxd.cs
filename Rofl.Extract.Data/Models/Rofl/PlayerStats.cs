@@ -562,6 +562,7 @@ public class PlayerStats
     /// <summary>
     /// Sorry, this is a field required for ReplayBook to function. Unique ID to match
     /// </summary>
+    [JsonIgnore]
     public string? UniqueId { get; set; }
 
     /// <summary>
