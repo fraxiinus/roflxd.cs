@@ -6,6 +6,8 @@ A complete ROFL parser for C#
 
 ## Installing
 
+[nuget.org package listing](https://www.nuget.org/packages/Fraxiinus.Rofl.Extract.Data)
+
 Package Manager
 
 ```powershell
