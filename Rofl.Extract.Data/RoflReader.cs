@@ -16,6 +16,11 @@ public static class RoflReader
         return await OpenFileForRead(filePath, loadAll, cancellationToken);
     }
 
+    public static async Task<ROFL> LoadAsync(Stream stream, bool loadAll = false, CancellationToken cancellationToken = default)
+    {
+        return await LoadFromStream(stream, loadAll, cancellationToken);
+    }
+
     private static async Task<ROFL> OpenFileForRead(string filePath, bool loadAll, CancellationToken cancellationToken = default)
     {
         if (!File.Exists(filePath))
@@ -24,20 +29,19 @@ public static class RoflReader
         }
 
         using FileStream fileStream = new(filePath, FileMode.Open);
-        return await LoadFromFileStream(fileStream, loadAll, cancellationToken);
+        return await LoadFromStream(fileStream, loadAll, cancellationToken);
     }
 
-    private static async Task<ROFL> LoadFromFileStream(Stream fileStream, bool loadAll, CancellationToken cancellationToken = default)
+    private static async Task<ROFL> LoadFromStream(Stream stream, bool loadAll, CancellationToken cancellationToken = default)
     {
-        if (!fileStream.CanRead)
+        if (!stream.CanRead)
         {
-            throw new ArgumentException("cannot read from filestream", nameof(fileStream));
+            throw new ArgumentException("cannot read from stream", nameof(stream));
         }
 
         // read header, it is a known size of 288
         // in order to increase performance, do BIG READS instead of small ones
-        byte[] headerBytes = new byte[288];
-        await fileStream.ReadAsync(headerBytes, 0, 288);
+        byte[] headerBytes = await stream.ReadBytesAsync(288, cancellationToken);
 
         if (!CheckFileSignature(headerBytes))
         {
@@ -57,8 +61,7 @@ public static class RoflReader
         }
 
         // ohhhh big read
-        byte[] fileContentBytes = new byte[bytesLeft];
-        await fileStream.ReadAsync(fileContentBytes, 0, bytesLeft, cancellationToken);
+        byte[] fileContentBytes = await stream.ReadBytesAsync(bytesLeft, cancellationToken);
 
         var metadata = new Metadata(fileContentBytes[0..(int)lengths.Metadata]);
 
