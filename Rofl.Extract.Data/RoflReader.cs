@@ -27,7 +27,7 @@ public static class RoflReader
         return await LoadFromFileStream(fileStream, loadAll, cancellationToken);
     }
 
-    private static async Task<ROFL> LoadFromFileStream(FileStream fileStream, bool loadAll, CancellationToken cancellationToken = default)
+    private static async Task<ROFL> LoadFromFileStream(Stream fileStream, bool loadAll, CancellationToken cancellationToken = default)
     {
         if (!fileStream.CanRead)
         {
@@ -36,7 +36,8 @@ public static class RoflReader
 
         // read header, it is a known size of 288
         // in order to increase performance, do BIG READS instead of small ones
-        byte[] headerBytes = await fileStream.ReadBytesAsync(288, cancellationToken);
+        byte[] headerBytes = new byte[288];
+        await fileStream.ReadAsync(headerBytes, 0, 288);
 
         if (!CheckFileSignature(headerBytes))
         {
@@ -56,7 +57,8 @@ public static class RoflReader
         }
 
         // ohhhh big read
-        byte[] fileContentBytes = await fileStream.ReadBytesAsync(bytesLeft, cancellationToken);
+        byte[] fileContentBytes = new byte[bytesLeft];
+        await fileStream.ReadAsync(fileContentBytes, 0, bytesLeft, cancellationToken);
 
         var metadata = new Metadata(fileContentBytes[0..(int)lengths.Metadata]);
 
