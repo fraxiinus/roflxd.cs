@@ -7,8 +7,17 @@ namespace Fraxiinus.Rofl.Extract.Data.Models.Rofl;
 /// </summary>
 public class PlayerStats
 {
+    [JsonPropertyName("ALL_IN_PINGS")]
+    public string? AllInPings { get; set; }
+
     [JsonPropertyName("ASSISTS")]
     public string? Assists { get; set; }
+
+    [JsonPropertyName("ASSIST_ME_PINGS")]
+    public string? AssistMePings { get; set; }
+
+    [JsonPropertyName("BAIT_PINGS")]
+    public string? BaitPings { get; set; }
 
     [JsonPropertyName("BARON_KILLS")]
     public string? BaronKills { get; set; }
@@ -24,6 +33,9 @@ public class PlayerStats
     /// </summary>
     [JsonPropertyName("BARRACKS_TAKEDOWNS")]
     public string? BarracksTakedowns { get; set; }
+
+    [JsonPropertyName("BASIC_PINGS")]
+    public string? BasicPings { get; set; }
 
     [JsonPropertyName("BOUNTY_LEVEL")]
     public string? BountyLevel { get; set; }
@@ -61,14 +73,26 @@ public class PlayerStats
     [JsonPropertyName("CHAMPION_TRANSFORM")]
     public string? ChampionTransform { get; set; }
 
+    [JsonPropertyName("COMMAND_PINGS")]
+    public string? CommandPings { get; set; }
+
     [JsonPropertyName("CONSUMABLES_PURCHASED")]
-    public string? ConsumablePurchased { get; set; }
+    public string? ConsumablesPurchased { get; set; }
+
+    [JsonPropertyName("DANGER_PINGS")]
+    public string? DangerPings { get; set; }
 
     [JsonPropertyName("DOUBLE_KILLS")]
     public string? DoubleKills { get; set; }
 
     [JsonPropertyName("DRAGON_KILLS")]
     public string? DragonKills { get; set; }
+
+    [JsonPropertyName("ENEMY_MISSING_PINGS")]
+    public string? EnemyMissingPings { get; set; }
+
+    [JsonPropertyName("ENEMY_VISION_PINGS")]
+    public string? EnemyVisionPings { get; set; }
 
     [JsonPropertyName("EXP")]
     public string? Exp { get; set; }
@@ -94,12 +118,22 @@ public class PlayerStats
     [JsonPropertyName("GAME_ENDED_IN_SURRENDER")]
     public string? GameEndedInSurrender { get; set; }
 
+    [JsonPropertyName("GET_BACK_PINGS")]
+    public string? GetBackPings { get; set; }
+
     [JsonPropertyName("GOLD_EARNED")]
     public string? GoldEarned { get; set; }
 
     [JsonPropertyName("GOLD_SPENT")]
     public string? GoldSpent { get; set; }
 
+    [JsonPropertyName("HOLD_PINGS")]
+    public string? HoldPings { get; set; }
+
+    [JsonPropertyName("HORDE_KILLS")]
+    public string? HordeKills { get; set; }
+
+    
     /// <summary>
     /// "HQ" here means "Nexus"
     /// </summary>
@@ -148,6 +182,12 @@ public class PlayerStats
     [JsonPropertyName("KILLING_SPREES")]
     public string? KillingSprees { get; set; }
 
+    [JsonPropertyName("LARGEST_ABILITY_DAMAGE")]
+    public string? LargestAbilityDamage { get; set; }
+
+    [JsonPropertyName("LARGEST_ATTACK_DAMAGE")]
+    public string? LargestAttackDamage { get; set; }
+
     [JsonPropertyName("LARGEST_CRITICAL_STRIKE")]
     public string? LargestCriticalStrike { get; set; }
 
@@ -156,6 +196,9 @@ public class PlayerStats
 
     [JsonPropertyName("LARGEST_MULTI_KILL")]
     public string? LargestMultiKill { get; set; }
+
+    [JsonPropertyName("LAST_TAKEDOWN_TIME")]
+    public string? LastTakedownTime { get; set; }
 
     [JsonPropertyName("LEVEL")]
     public string? Level { get; set; }
@@ -180,6 +223,9 @@ public class PlayerStats
 
     [JsonPropertyName("NAME")]
     public string? Name { get; set; }
+
+    [JsonPropertyName("NEED_VISION_PINGS")]
+    public string? NeedVisionPings { get; set; }
 
     [JsonPropertyName("NEUTRAL_MINIONS_KILLED")]
     public string? NeutralMinionsKilled { get; set; }
@@ -210,6 +256,9 @@ public class PlayerStats
 
     [JsonPropertyName("OBJECTIVES_STOLEN_ASSISTS")]
     public string? ObjectivesStolenAssists { get; set; }
+
+    [JsonPropertyName("ON_MY_WAY_PINGS")]
+    public string? OnMyWayPings { get; set; }
 
     [JsonPropertyName("PENTA_KILLS")]
     public string? PentaKills { get; set; }
@@ -388,6 +437,18 @@ public class PlayerStats
     [JsonPropertyName("PLAYERS_THAT_MUTED_ME")]
     public string? PlayersThatMutedMe { get; set; }
 
+    [JsonPropertyName("PLAYER_AUGMENT_1")]
+    public string? PlayerAugment1 { get; set; }
+
+    [JsonPropertyName("PLAYER_AUGMENT_2")]
+    public string? PlayerAugment2 { get; set; }
+
+    [JsonPropertyName("PLAYER_AUGMENT_3")]
+    public string? PlayerAugment3 { get; set; }
+
+    [JsonPropertyName("PLAYER_AUGMENT_4")]
+    public string? PlayerAugment4 { get; set; }
+
     [JsonPropertyName("PLAYER_POSITION")]
     public string? PlayerPosition { get; set; }
 
@@ -430,8 +491,29 @@ public class PlayerStats
     [JsonPropertyName("PLAYER_SCORE_9")]
     public string? PlayerScore9 { get; set; }
 
+    [JsonPropertyName("PLAYER_SUBTEAM")]
+    public string? PlayerSubteam { get; set; }
+
+    [JsonPropertyName("PLAYER_SUBTEAM_PLACEMENT")]
+    public string? PlayerSubteamPlacement { get; set; }
+
+    [JsonPropertyName("PUSH_PINGS")]
+    public string? PushPings { get; set; }
+
+    /// <summary>
+    /// Player Universally Unique IDentifiers. The value is unencrypted.
+    /// </summary>
+    [JsonPropertyName("PUUID")]
+    public string? PUUID { get; set; }
+
     [JsonPropertyName("QUADRA_KILLS")]
     public string? QuadraKills { get; set; }
+
+    [JsonPropertyName("RETREAT_PINGS")]
+    public string? RetreatPings { get; set; }
+
+    [JsonPropertyName("RIFT_HERALD_KILLS")]
+    public string? RiftHeraldKills { get; set; }
 
     [JsonPropertyName("SIGHT_WARDS_BOUGHT_IN_GAME")]
     public string? SightWardsBoughtInGame { get; set; }
@@ -476,7 +558,7 @@ public class PlayerStats
     public string? SummonSpell1Cast { get; set; }
 
     [JsonPropertyName("SUMMON_SPELL2_CAST")]
-    public string? SummonSpell22Cast { get; set; }
+    public string? SummonSpell2Cast { get; set; }
 
     [JsonPropertyName("TEAM")]
     public string? Team { get; set; }
@@ -518,7 +600,7 @@ public class PlayerStats
     public string? TotalDamageDealtToTurrets { get; set; }
 
     [JsonPropertyName("TOTAL_DAMAGE_SELF_MITIGATED")]
-    public string? TotalDamageSeltMitigated { get; set; }
+    public string? TotalDamageSelfMitigated { get; set; }
 
     [JsonPropertyName("TOTAL_DAMAGE_SHIELDED_ON_TEAMMATES")]
     public string? TotalDamageShieldedOnTeammates { get; set; }
@@ -534,6 +616,9 @@ public class PlayerStats
 
     [JsonPropertyName("TOTAL_TIME_CROWD_CONTROL_DEALT")]
     public string? TotalTimeCrowdControlDealt { get; set; }
+
+    [JsonPropertyName("TOTAL_TIME_CROWD_CONTROL_DEALT_TO_CHAMPIONS")]
+    public string? TotalTimeCrowdControlDealtToChampions { get; set; }
 
     [JsonPropertyName("TOTAL_TIME_SPENT_DEAD")]
     public string? TotalTimeSpentDead { get; set; }
@@ -573,6 +658,9 @@ public class PlayerStats
 
     [JsonPropertyName("VICTORY_POINT_TOTAL")]
     public string? VictoryPointTotal { get; set; }
+
+    [JsonPropertyName("VISION_CLEARED_PINGS")]
+    public string? VisionClearedPings { get; set; }
 
     [JsonPropertyName("VISION_SCORE")]
     public string? VisionScore { get; set; }
