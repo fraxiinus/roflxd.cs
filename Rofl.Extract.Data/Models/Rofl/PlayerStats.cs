@@ -107,7 +107,7 @@ public class PlayerStats
     /// "HQ" here means "Nexus"
     /// </summary>
     [JsonPropertyName("FRIENDLY_HQ_LOST")]
-    public string? FriendlyHqLost { get; set; }
+    public string? FriendlyHQLost { get; set; }
 
     [JsonPropertyName("FRIENDLY_TURRET_LOST")]
     public string? FriendlyTurretLost { get; set; }
@@ -138,13 +138,13 @@ public class PlayerStats
     /// "HQ" here means "Nexus"
     /// </summary>
     [JsonPropertyName("HQ_KILLED")]
-    public string? HqKilled { get; set; }
+    public string? HQKilled { get; set; }
 
     /// <summary>
     /// "HQ" here means "Nexus"
     /// </summary>
     [JsonPropertyName("HQ_TAKEDOWNS")]
-    public string? HqTakedowns { get; set; }
+    public string? HQTakedowns { get; set; }
 
     [JsonPropertyName("ID")]
     public string? Id { get; set; }
