@@ -221,6 +221,27 @@ public class PlayerStats
     [JsonPropertyName("MUTED_ALL")]
     public string? MutedAll { get; set; }
 
+    [JsonPropertyName("Missions_ChampionsKilled")]
+    public string? MissionsChampionsKilled { get; set; }
+
+    [JsonPropertyName("Missions_CreepScore")]
+    public string? MissionsCreepScore { get; set; }
+
+    [JsonPropertyName("Missions_GoldFromStructuresDestroyed")]
+    public string? MissionsGoldFromStructuresDestroyed { get; set; }
+
+    [JsonPropertyName("Missions_GoldFromTurretPlatesTaken")]
+    public string? MissionsGoldFromTurretPlatesTaken { get; set; }
+
+    [JsonPropertyName("Missions_HealingFromLevelObjects")]
+    public string? MissionsHealingFromLevelObjects { get; set; }
+
+    [JsonPropertyName("Missions_MinionsKilled")]
+    public string? MissionsMinionsKilled { get; set; }
+
+    [JsonPropertyName("Missions_TurretPlatesDestroyed")]
+    public string? MissionsTurretPlatesDestroyed { get; set; }
+
     [JsonPropertyName("NAME")]
     public string? Name { get; set; }
 
