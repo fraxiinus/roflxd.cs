@@ -31,7 +31,6 @@ public class Metadata
             ?? throw new Exception("RawMetadata parsed to null");
 
         GameLength = rawMetadata.GameLength;
-        GameVersion = rawMetadata.GameVersion!;
         LastGameChunkId = rawMetadata.LastGameChunkId;
         LastKeyframeId = rawMetadata.LastKeyframeId;
 
@@ -48,7 +47,6 @@ public class Metadata
         var rawMetadata = new RawMetadata
         {
             GameLength = GameLength,
-            GameVersion = GameVersion,
             LastGameChunkId = LastGameChunkId,
             LastKeyframeId = LastKeyframeId,
             StatsJson = playerStatsJson
@@ -66,11 +64,6 @@ public class Metadata
     /// Duration of the game, in milliseconds
     /// </summary>
     public ulong GameLength { get; private set; }
-
-    /// <summary>
-    /// Patch version the game occurred on
-    /// </summary>
-    public string GameVersion { get; private set; }
 
     /// <summary>
     /// Chunk ID of the last chunk
@@ -92,9 +85,6 @@ public class RawMetadata
 {
     [JsonPropertyName("gameLength")]
     public ulong GameLength { get; set; }
-
-    [JsonPropertyName("gameVersion")]
-    public string? GameVersion { get; set; }
 
     [JsonPropertyName("lastGameChunkId")]
     public uint LastGameChunkId { get; set; }
