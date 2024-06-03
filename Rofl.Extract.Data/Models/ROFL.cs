@@ -28,32 +28,47 @@ public class ROFL
     /// <summary>
     /// The 6 bytes all ROFL files begin with
     /// </summary>
-    public static readonly byte[] Signature = { 0x52, 0x49, 0x4F, 0x54, 0x00, 0x00 };
+
+    // The signature of a ROFL file is always this bytes array then the game version and 22 bytes that look like random the same between all files
+    public static readonly byte[] Signature = { 0x52, 0x49, 0x4F, 0x54, 0x02, 0x00, 0x75, 0x1C, 0x08, 0xCD, 0x20, 0x99, 0xF8, 0x1C, 0x0E };
 
     ///
+
+    // I let the original code commented if someone find the location of offsets but for me there is no more offsets in the new replay files
+    // public ROFL()
+    // {
+    //     LoadState = LoadState.Empty;
+    //     ChunkHeaders = new List<ChunkHeader>();
+    //     Chunks = new List<Chunk>();
+    // }
+
+    // public ROFL(LoadState loadState,
+    //             byte[]? replaySignature,
+    //             Lengths? lengths,
+    //             Metadata? metadata,
+    //             PayloadHeader? payloadHeader,
+    //             IEnumerable<ChunkHeader> chunkHeaders,
+    //             IEnumerable<Chunk> chunks)
+    // {
+    //     LoadState = loadState;
+    //     ReplaySignature = replaySignature;
+    //     Lengths = lengths;
+    //     Metadata = metadata;
+    //     PayloadHeader = payloadHeader;
+    //     ChunkHeaders = chunkHeaders;
+    //     Chunks = chunks;
+    // }
 
     public ROFL()
     {
         LoadState = LoadState.Empty;
-        ChunkHeaders = new List<ChunkHeader>();
-        Chunks = new List<Chunk>();
     }
 
-    public ROFL(LoadState loadState,
-                byte[]? replaySignature,
-                Lengths? lengths,
-                Metadata? metadata,
-                PayloadHeader? payloadHeader,
-                IEnumerable<ChunkHeader> chunkHeaders,
-                IEnumerable<Chunk> chunks)
+    public ROFL(LoadState loadState, String gameVersion, Metadata? metadata)
     {
         LoadState = loadState;
-        ReplaySignature = replaySignature;
-        Lengths = lengths;
+        GameVersion = gameVersion;
         Metadata = metadata;
-        PayloadHeader = payloadHeader;
-        ChunkHeaders = chunkHeaders;
-        Chunks = chunks;
     }
 
     /// <summary>
@@ -68,18 +83,21 @@ public class ROFL
             throw new Exception("cannot save file unless it has been fully loaded");
         }
 
-        var chunkHeaderBytes = ChunkHeaders.Select(x => x.ToBytes())
-            .Aggregate((a, b) => { return a.Concat(b).ToArray(); });
+        return new byte[0]; // Temporary return value for SampleApp to compile
 
-        var chunkBytes = Chunks.Select(x => x.ToBytes())
-            .Aggregate((a, b) => { return a.Concat(b).ToArray(); });
+        // I let the original code commented if someone find the location of offsets but for me there is no more offsets in the new replay files
+        // var chunkHeaderBytes = ChunkHeaders.Select(x => x.ToBytes())
+        //     .Aggregate((a, b) => { return a.Concat(b).ToArray(); });
 
-        var bytesToWrite = Signature.Concat(ReplaySignature!)
-            .Concat(Lengths!.ToBytes()).Concat(Metadata!.ToBytes())
-            .Concat(PayloadHeader!.ToBytes()).Concat(chunkHeaderBytes)
-            .Concat(chunkBytes).ToArray();
+        // var chunkBytes = Chunks.Select(x => x.ToBytes())
+        //     .Aggregate((a, b) => { return a.Concat(b).ToArray(); });
 
-        return bytesToWrite;
+        // var bytesToWrite = Signature.Concat(ReplaySignature!)
+        //     .Concat(Lengths!.ToBytes()).Concat(Metadata!.ToBytes())
+        //     .Concat(PayloadHeader!.ToBytes()).Concat(chunkHeaderBytes)
+        //     .Concat(chunkBytes).ToArray();
+
+        // return bytesToWrite;
     }
 
     // Class Properties
@@ -87,16 +105,20 @@ public class ROFL
     public LoadState LoadState { get; private set; }
 
     // ROFL file contents
-
-    public byte[]? ReplaySignature { get; private set; }
-
-    public Lengths? Lengths { get; private set; }
+    public String GameVersion { get; private set; }
 
     public Metadata? Metadata { get; private set; }
 
-    public PayloadHeader? PayloadHeader { get; private set; }
+    // I let the original code commented if someone find the location of offsets but for me there is no more offsets in the new replay files
+    // public byte[]? ReplaySignature { get; private set; }
 
-    public IEnumerable<ChunkHeader> ChunkHeaders { get; private set; }
+    // public Lengths? Lengths { get; private set; }
 
-    public IEnumerable<Chunk> Chunks { get; private set; }
+    // public Metadata? Metadata { get; private set; }
+
+    // public PayloadHeader? PayloadHeader { get; private set; }
+
+    // public IEnumerable<ChunkHeader> ChunkHeaders { get; private set; }
+
+    // public IEnumerable<Chunk> Chunks { get; private set; }
 }
