@@ -30,13 +30,13 @@ public enum LoadState
 
 public static class ReplayReader
 {
-    public static async Task<ParseResult> ReadReplay(string filePath, ReplayReaderOptions options, CancellationToken cancellationToken = default)
+    public static async Task<ParseResult> ReadReplayAsync(string filePath, ReplayReaderOptions options, CancellationToken cancellationToken = default)
     {
         using FileStream fileStream = new(filePath, FileMode.Open);
-        return await ReadReplay(fileStream, options, cancellationToken);
+        return await ReadReplayAsync(fileStream, options, cancellationToken);
     }
 
-    public static async Task<ParseResult> ReadReplay(Stream fileStream, ReplayReaderOptions options, CancellationToken cancellationToken = default)
+    public static async Task<ParseResult> ReadReplayAsync(Stream fileStream, ReplayReaderOptions options, CancellationToken cancellationToken = default)
     {
         // if replay file type is unknown, then auto detect type
         var replayType = options.Type == ReplayType.Unknown ? await DetectReplayTypeAsync(fileStream, cancellationToken) : options.Type;

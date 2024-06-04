@@ -100,7 +100,7 @@ public class Program
         };
 
         // Parse file using provided options
-        var target = await ReplayReader.ReadReplay(file.FullName, options, cancellationToken);
+        var target = await ReplayReader.ReadReplayAsync(file.FullName, options, cancellationToken);
 
         if (target.Type is ReplayType.Unknown || target.Result is null)
         {
@@ -139,14 +139,14 @@ public class Program
             switch (target.Type)
             {
                 case ReplayType.ROFL:
-                    var outputFile = await ((ROFL)target.Result).ToJsonFile(file, output, cancellationToken);
+                    var outputFile = await ((ROFL) target.Result).ToJsonFile(file, output, cancellationToken);
                     if (verbose)
                     {
                         Console.Write($"Saved file: \"{outputFile}\"");
                     }
                     break;
                 case ReplayType.ROFL2:
-                    outputFile = await ((ROFL2)target.Result).ToJsonFile(file, output, cancellationToken);
+                    outputFile = await ((ROFL2) target.Result).ToJsonFile(file, output, cancellationToken);
                     if (verbose)
                     {
                         Console.Write($"Saved file: \"{outputFile}\"");
