@@ -7,21 +7,24 @@ using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Fraxiinus.Rofl.Extract.Data;
+namespace Fraxiinus.Rofl.Extract.Data.Readers;
 
-public static class RoflReader
+/// <summary>
+/// Handles reading of ROFL replay formats
+/// </summary>
+public class RoflReader
 {
-    public static async Task<ROFL> LoadAsync(string filePath, bool loadAll = false, CancellationToken cancellationToken = default)
+    public static async Task<ROFL> LoadAsync(string filePath, ReplayReaderOptions options, CancellationToken cancellationToken = default)
     {
-        return await OpenFileForRead(filePath, loadAll, cancellationToken);
+        return await OpenFileForRead(filePath, options, cancellationToken);
     }
 
-    public static async Task<ROFL> LoadAsync(Stream stream, bool loadAll = false, CancellationToken cancellationToken = default)
+    public static async Task<ROFL> LoadAsync(Stream stream, ReplayReaderOptions options, CancellationToken cancellationToken = default)
     {
-        return await LoadFromStream(stream, loadAll, cancellationToken);
+        return await LoadFromStream(stream, options, cancellationToken);
     }
 
-    private static async Task<ROFL> OpenFileForRead(string filePath, bool loadAll, CancellationToken cancellationToken = default)
+    private static async Task<ROFL> OpenFileForRead(string filePath, ReplayReaderOptions options, CancellationToken cancellationToken = default)
     {
         if (!File.Exists(filePath))
         {
@@ -29,10 +32,10 @@ public static class RoflReader
         }
 
         using FileStream fileStream = new(filePath, FileMode.Open);
-        return await LoadFromStream(fileStream, loadAll, cancellationToken);
+        return await LoadFromStream(fileStream, options, cancellationToken);
     }
 
-    private static async Task<ROFL> LoadFromStream(Stream stream, bool loadAll, CancellationToken cancellationToken = default)
+    private static async Task<ROFL> LoadFromStream(Stream stream, ReplayReaderOptions options, CancellationToken cancellationToken = default)
     {
         if (!stream.CanRead)
         {
@@ -55,7 +58,7 @@ public static class RoflReader
 
         // what to read next depends on user
         int bytesLeft = (int)(lengths.File - lengths.Header); // read everything
-        if (!loadAll)
+        if (!options.LoadPayload)
         {
             bytesLeft = (int)(lengths.Metadata + lengths.PayloadHeader); // read just metadata and payload header
         }
@@ -71,14 +74,14 @@ public static class RoflReader
         var chunks = new List<Chunk>();
         LoadState loadState;
 
-        if (loadAll)
+        if (options.LoadPayload)
         {
             var chunkHeaderResults = new List<ChunkHeader>();
             int chunkHeaderStart = 0;
             for (int i = 0; i < payloadHeader.ChunkCount + payloadHeader.KeyframeCount; i++)
             {
                 // chunk headers are exactly 17 bytes
-                chunkHeaderStart = payloadHeaderEnd + (17 * i);
+                chunkHeaderStart = payloadHeaderEnd + 17 * i;
                 byte[] chunkHeaderBytes = fileContentBytes[chunkHeaderStart..(chunkHeaderStart + 17)];
                 chunkHeaderResults.Add(new ChunkHeader(chunkHeaderBytes));
             }

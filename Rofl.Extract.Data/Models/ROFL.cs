@@ -1,35 +1,21 @@
 ﻿using Fraxiinus.Rofl.Extract.Data.Models.Rofl;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Text.Encodings.Web;
+using System.Text.Json;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Fraxiinus.Rofl.Extract.Data.Models;
 
-public enum LoadState
-{
-    /// <summary>
-    /// Nothing loaded at all
-    /// </summary>
-    Empty,
-
-    /// <summary>
-    /// <see cref="ROFL.ChunkHeaders"/> and <see cref="ROFL.Chunks"/> are not loaded
-    /// </summary>
-    NoPayload,
-
-    /// <summary>
-    /// Everything is loaded
-    /// </summary>
-    Full
-}
-
-public class ROFL
+public class ROFL : IReplay
 {
     /// <summary>
     /// The 6 bytes all ROFL files begin with
     /// </summary>
     public static readonly byte[] Signature = { 0x52, 0x49, 0x4F, 0x54, 0x00, 0x00 };
-
     ///
 
     public ROFL()
@@ -54,6 +40,36 @@ public class ROFL
         PayloadHeader = payloadHeader;
         ChunkHeaders = chunkHeaders;
         Chunks = chunks;
+    }
+
+    public async Task<string> ToFile(FileInfo inputFile, string filePath, CancellationToken cancellationToken = default)
+    {
+        var outputFile = !string.IsNullOrEmpty(filePath)
+                ? filePath
+                : Path.GetFileNameWithoutExtension(inputFile.FullName) + $" - Copy {DateTime.Now:yyyyMMddTHHmmss}.rofl";
+
+        using FileStream fileStream = new(outputFile, FileMode.Create);
+        await fileStream.WriteAsync(ToBytes(), cancellationToken);
+
+        return outputFile;
+    }
+
+    public async Task<string> ToJsonFile(FileInfo inputFile, string filePath, CancellationToken cancellationToken = default)
+    {
+        var outputFile = !string.IsNullOrEmpty(filePath)
+                ? filePath
+                : Path.GetFileNameWithoutExtension(inputFile.FullName) + $" - Copy {DateTime.Now:yyyyMMddTHHmmss}.json";
+
+        var jsonOptions = new JsonSerializerOptions
+        {
+            WriteIndented = true,
+            Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping
+        };
+
+        using FileStream fileStream = new(outputFile, FileMode.Create);
+        await JsonSerializer.SerializeAsync(fileStream, this, jsonOptions, cancellationToken);
+
+        return outputFile;
     }
 
     /// <summary>

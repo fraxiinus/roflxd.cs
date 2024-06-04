@@ -9,11 +9,15 @@
     },
     "Output Json (No Payload)": {
       "commandName": "Project",
-      "commandLineArgs": "parse \"E:\\Etirps\\Documents\\League of Legends\\100 Files\\HN1-5476740037.rofl\" --mode nopayload --verbose"
+      "commandLineArgs": "parse \"C:\\Users\\leeas\\Downloads\\BR1-2902998700.rofl\" --mode nopayload --verbose"
     },
     "Output Json (Full)": {
       "commandName": "Project",
       "commandLineArgs": "parse \"E:\\Etirps\\Documents\\League of Legends\\Replays\\NA1-4286016580 - Copy 20220716T212549.rofl\" --mode full --verbose"
+    },
+    "Output Json (v2)": {
+      "commandName": "Project",
+      "commandLineArgs": "parse \"C:\\Users\\leeas\\Code\\roflxd.cs\\Test files\\rofl-version2_01.rofl\" --mode nopayload --verbose"
     },
     "Verify": {
       "commandName": "Project",
