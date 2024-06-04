@@ -15,7 +15,7 @@
 	<Product>$(AssemblyName)</Product>
 	<Description>Parser for League of Legends replays, part of roflxd</Description>
 	<PackageLicenseExpression>MIT</PackageLicenseExpression>
-	<Version>2.3.0</Version>
+	<Version>3.0.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
