@@ -55,7 +55,7 @@ public static class ReplayReader
         return new ParseResult(replay, replayType);
     }
 
-    public static async Task<ReplayType> DetectReplayType(string filePath, CancellationToken cancellationToken = default)
+    public static async Task<ReplayType> DetectReplayTypeAsync(string filePath, CancellationToken cancellationToken = default)
     {
         if (!File.Exists(filePath))
         {

@@ -44,12 +44,8 @@ public class RoflReader
 
         // read header, it is a known size of 288
         // in order to increase performance, do BIG READS instead of small ones
+        stream.Seek(0, SeekOrigin.Begin);
         byte[] headerBytes = await stream.ReadBytesAsync(288, cancellationToken);
-
-        if (!CheckFileSignature(headerBytes))
-        {
-            throw new Exception("file signature does not match ROFL format");
-        }
 
         // replay signature is always 256 bytes
         var replaySignature = headerBytes[6..262];
