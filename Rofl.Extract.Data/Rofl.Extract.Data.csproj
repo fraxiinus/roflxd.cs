@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <AssemblyName>Fraxiinus.$(MSBuildProjectName)</AssemblyName>
@@ -15,7 +15,7 @@
 	<Product>$(AssemblyName)</Product>
 	<Description>Parser for League of Legends replays, part of roflxd</Description>
 	<PackageLicenseExpression>MIT</PackageLicenseExpression>
-	<Version>3.1.1</Version>
+	<Version>3.2.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
