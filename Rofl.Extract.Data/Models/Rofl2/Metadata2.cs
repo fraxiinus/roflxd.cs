@@ -37,6 +37,8 @@ public class Metadata2
 
         PlayerStatistics = JsonSerializer.Deserialize<PlayerStats2[]>(rawMetadata.StatsJson!)
             ?? throw new Exception("PlayerStats[] parsed to null");
+
+        RawJson = rawMetadata.StatsJson!;
     }
 
     /// <summary>
@@ -86,6 +88,11 @@ public class Metadata2
     /// Array of player information and stats
     /// </summary>
     public PlayerStats2[] PlayerStatistics { get; private set; }
+
+    /// <summary>
+    /// The raw json player information, use when identifying if PlayerStats2 needs to be updated
+    /// </summary>
+    public string RawJson { get; private set; }
 }
 
 public class RawMetadata
